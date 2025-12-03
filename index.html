@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Secrets</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --secret: #9b59b6;
+        --secondary: #3498db;
+        --danger: #e74c3c;
+        --success: #27ae60;
+        --warning: #f39c12;
+      }
+
+      body {
+        background: #f8f9fa;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Login Screen */
+      .login-screen {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .login-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .login-icon {
+        color: var(--secret);
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      /* Dashboard */
+      .dashboard {
+        display: none;
+      }
+
+      .navbar {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, var(--secret) 0%, #8e44ad 100%);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+      }
+
+      /* Category Card */
+      .category-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        border: 2px solid var(--secret);
+      }
+
+      .category-header {
+        padding: 1.25rem;
+        background: rgba(155, 89, 182, 0.05);
+        border-bottom: 1px solid rgba(155, 89, 182, 0.1);
+        cursor: pointer;
+      }
+
+      .category-content {
+        padding: 1.25rem;
+      }
+
+      /* Item Card */
+      .item-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--secondary);
+      }
+
+      .btn-secret {
+        background: var(--secret);
+        color: white;
+        border: none;
+      }
+
+      .btn-secret:hover {
+        background: #8e44ad;
+        color: white;
+      }
+
+      .floating-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--secret);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 5px 20px rgba(155, 89, 182, 0.5);
+      }
+
+      .stats-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.25rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .badge-category {
+        background: var(--secret);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+
+      .error-message {
+        color: var(--danger);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        display: none;
+      }
+
+      .password-field {
+        position: relative;
+      }
+
+      .password-field input {
+        padding-right: 40px;
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #6c757d;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+      <div class="login-card">
+        <div class="login-icon">
+          <i class="fas fa-user-secret"></i>
+        </div>
+
+        <h3 class="text-center mb-4">My Secrets</h3>
+
+        <!-- Setup Form (muncul pertama kali) -->
+        <div id="setupForm">
+          <div class="mb-3">
+            <label class="form-label">Buat Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="setupUsername"
+              placeholder="Pilih username Anda"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Buat Password</label>
+            <div class="password-field">
+              <input
+                type="password"
+                class="form-control"
+                id="setupPassword"
+                placeholder="Minimal 6 karakter"
+              />
+              <button
+                class="toggle-password"
+                type="button"
+                onclick="toggleSetupPassword()"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Konfirmasi Password</label>
+            <div class="password-field">
+              <input
+                type="password"
+                class="form-control"
+                id="setupConfirmPassword"
+                placeholder="Ketik ulang password"
+              />
+              <button
+                class="toggle-password"
+                type="button"
+                onclick="toggleSetupConfirmPassword()"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button class="btn btn-secret w-100 mb-3" onclick="setupAccount()">
+            <i class="fas fa-user-plus me-2"></i> Buat Akun
+          </button>
+        </div>
+
+        <!-- Login Form (muncul setelah setup) -->
+        <div id="loginForm" style="display: none">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="loginUsername"
+              placeholder="Masukkan username"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="password-field">
+              <input
+                type="password"
+                class="form-control"
+                id="loginPassword"
+                placeholder="Masukkan password"
+              />
+              <button
+                class="toggle-password"
+                type="button"
+                onclick="toggleLoginPassword()"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="loginError" class="error-message">
+            <i class="fas fa-exclamation-circle me-1"></i>
+            Username atau password salah!
+          </div>
+
+          <button class="btn btn-secret w-100 mb-3" onclick="login()">
+            <i class="fas fa-sign-in-alt me-2"></i> Login
+          </button>
+
+          <div class="text-center">
+            <small class="text-muted">
+              <i class="fas fa-info-circle me-1"></i>
+              Data disimpan di browser Anda
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="#">
+            <i class="fas fa-user-secret me-2"></i>My Secrets
+          </a>
+          <div class="navbar-nav ms-auto">
+            <div class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user-circle me-1"></i>
+                <span id="currentUserDisplay">User</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#" onclick="logout()">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container">
+          <h1 class="display-6 fw-bold mb-2">My Secrets</h1>
+          <p class="mb-0">
+            Selamat datang, <span id="welcomeUser">User</span>!
+          </p>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="container mb-4">
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="totalCategories">0</div>
+              <div class="stats-label">Kategori</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="totalItems">0</div>
+              <div class="stats-label">Total Akun</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="socialMediaCount">0</div>
+              <div class="stats-label">Media Sosial</div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="stats-card">
+              <div class="stats-number" id="emailCount">0</div>
+              <div class="stats-label">Email</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <section class="container mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4>Semua Kategori</h4>
+          <button
+            class="btn btn-secret btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#addCategoryModal"
+          >
+            <i class="fas fa-plus me-1"></i> Tambah Kategori
+          </button>
+        </div>
+
+        <div id="categoriesContainer">
+          <!-- Kategori akan ditampilkan di sini -->
+        </div>
+
+        <div id="emptyState" class="text-center py-5">
+          <i class="fas fa-user-secret fa-3x text-muted mb-3"></i>
+          <h5 class="text-muted mb-3">Belum Ada Kategori</h5>
+          <p class="text-muted mb-4">
+            Mulai tambahkan kategori untuk menyimpan akun Anda
+          </p>
+          <button
+            class="btn btn-secret"
+            data-bs-toggle="modal"
+            data-bs-target="#addCategoryModal"
+          >
+            <i class="fas fa-plus me-2"></i> Tambah Kategori Pertama
+          </button>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-light py-3 mt-5">
+        <div class="container text-center">
+          <small class="text-muted">
+            &copy; 2023 My Secrets • Data disimpan di browser
+          </small>
+        </div>
+      </footer>
+
+      <!-- Floating Button -->
+      <div
+        class="floating-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#addCategoryModal"
+      >
+        <i class="fas fa-plus"></i>
+      </div>
+
+      <!-- Add Category Modal -->
+      <div class="modal fade" id="addCategoryModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Tambah Kategori</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Nama Kategori</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="categoryName"
+                  placeholder="Contoh: Media Sosial, Email, dll"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Deskripsi (opsional)</label>
+                <textarea
+                  class="form-control"
+                  id="categoryDescription"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                class="btn btn-secret"
+                onclick="saveCategory()"
+              >
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Item Modal -->
+      <div class="modal fade" id="addItemModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Tambah Akun</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="itemCategoryId" />
+              <div class="mb-3">
+                <label class="form-label">Nama Akun</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="itemName"
+                  placeholder="Contoh: Instagram, Facebook, dll"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Username/Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="itemUsername"
+                  placeholder="username@email.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="itemPassword"
+                    placeholder="Password"
+                  />
+                  <button
+                    class="toggle-password"
+                    type="button"
+                    onclick="toggleItemPassword()"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Catatan (opsional)</label>
+                <textarea
+                  class="form-control"
+                  id="itemNotes"
+                  rows="2"
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Batal
+              </button>
+              <button type="button" class="btn btn-secret" onclick="saveItem()">
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Item Modal -->
+      <div class="modal fade" id="viewItemModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="viewItemTitle">Detail Akun</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <strong>Username:</strong>
+                <div class="mt-1" id="viewItemUsername"></div>
+              </div>
+              <div class="mb-3">
+                <strong>Password:</strong>
+                <div class="password-field mt-1">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="viewItemPassword"
+                    readonly
+                  />
+                  <button
+                    class="toggle-password"
+                    type="button"
+                    onclick="toggleViewPassword()"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button
+                    class="btn btn-outline-secondary btn-sm ms-2"
+                    type="button"
+                    onclick="copyPassword()"
+                  >
+                    <i class="fas fa-copy"></i> Salin
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3" id="viewItemNotesContainer">
+                <strong>Catatan:</strong>
+                <div class="mt-1" id="viewItemNotes"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Tutup
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                onclick="editCurrentItem()"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="deleteCurrentItem()"
+              >
+                Hapus
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Data storage
+      let categories = [];
+      let currentItemId = null;
+      let currentCategoryId = null;
+      let currentUser = null;
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        checkIfAccountExists();
+      });
+
+      // Check if account exists in localStorage
+      function checkIfAccountExists() {
+        const savedUser = localStorage.getItem("secretManagerUser");
+        const savedPass = localStorage.getItem("secretManagerPass");
+
+        if (savedUser && savedPass) {
+          // Account exists, show login form
+          document.getElementById("setupForm").style.display = "none";
+          document.getElementById("loginForm").style.display = "block";
+
+          // Auto-fill username
+          document.getElementById("loginUsername").value = savedUser;
+        } else {
+          // No account, show setup form
+          document.getElementById("setupForm").style.display = "block";
+          document.getElementById("loginForm").style.display = "none";
+        }
+      }
+
+      // Toggle password visibility functions
+      function toggleSetupPassword() {
+        const input = document.getElementById("setupPassword");
+        const icon = event.target.closest("button").querySelector("i");
+        togglePasswordVisibility(input, icon);
+      }
+
+      function toggleSetupConfirmPassword() {
+        const input = document.getElementById("setupConfirmPassword");
+        const icon = event.target.closest("button").querySelector("i");
+        togglePasswordVisibility(input, icon);
+      }
+
+      function toggleLoginPassword() {
+        const input = document.getElementById("loginPassword");
+        const icon = event.target.closest("button").querySelector("i");
+        togglePasswordVisibility(input, icon);
+      }
+
+      function toggleItemPassword() {
+        const input = document.getElementById("itemPassword");
+        const icon = event.target.closest("button").querySelector("i");
+        togglePasswordVisibility(input, icon);
+      }
+
+      function toggleViewPassword() {
+        const input = document.getElementById("viewItemPassword");
+        const icon = event.target.closest("button").querySelector("i");
+        togglePasswordVisibility(input, icon);
+      }
+
+      function togglePasswordVisibility(input, icon) {
+        if (input.type === "password") {
+          input.type = "text";
+          icon.className = "fas fa-eye-slash";
+        } else {
+          input.type = "password";
+          icon.className = "fas fa-eye";
+        }
+      }
+
+      // Setup new account
+      function setupAccount() {
+        const username = document.getElementById("setupUsername").value.trim();
+        const password = document.getElementById("setupPassword").value;
+        const confirmPassword = document.getElementById(
+          "setupConfirmPassword"
+        ).value;
+
+        // Validation
+        if (!username || username.length < 3) {
+          alert("Username minimal 3 karakter!");
+          return;
+        }
+
+        if (!password || password.length < 6) {
+          alert("Password minimal 6 karakter!");
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert("Password tidak cocok!");
+          return;
+        }
+
+        // Save to localStorage
+        localStorage.setItem("secretManagerUser", username);
+        localStorage.setItem("secretManagerPass", password);
+
+        // Set current user
+        currentUser = username;
+
+        // Switch to login form
+        document.getElementById("setupForm").style.display = "none";
+        document.getElementById("loginForm").style.display = "block";
+
+        // Auto-fill login form
+        document.getElementById("loginUsername").value = username;
+
+        alert("Akun berhasil dibuat! Silakan login.");
+      }
+
+      // Login function
+      function login() {
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        // Get saved credentials
+        const savedUser = localStorage.getItem("secretManagerUser");
+        const savedPass = localStorage.getItem("secretManagerPass");
+
+        // Check credentials
+        if (username === savedUser && password === savedPass) {
+          // Login success
+          currentUser = username;
+          showDashboard();
+        } else {
+          // Login failed
+          document.getElementById("loginError").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("loginError").style.display = "none";
+          }, 3000);
+        }
+      }
+
+      // Show dashboard
+      function showDashboard() {
+        // Load categories for current user
+        loadUserCategories();
+
+        // Update UI
+        document.getElementById("welcomeUser").textContent = currentUser;
+        document.getElementById("currentUserDisplay").textContent = currentUser;
+
+        // Switch screens
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+        // Render categories
+        renderCategories();
+        updateStats();
+      }
+
+      // Load categories for current user
+      function loadUserCategories() {
+        const userCategories = localStorage.getItem(
+          `secretCategories_${currentUser}`
+        );
+        categories = userCategories ? JSON.parse(userCategories) : [];
+      }
+
+      // Save categories for current user
+      function saveUserCategories() {
+        localStorage.setItem(
+          `secretCategories_${currentUser}`,
+          JSON.stringify(categories)
+        );
+      }
+
+      // Logout
+      function logout() {
+        if (confirm("Apakah Anda yakin ingin logout?")) {
+          currentUser = null;
+          document.getElementById("loginScreen").style.display = "flex";
+          document.getElementById("dashboard").style.display = "none";
+
+          // Clear login form
+          document.getElementById("loginPassword").value = "";
+        }
+      }
+
+      // Save category
+      function saveCategory() {
+        const name = document.getElementById("categoryName").value;
+        const description = document.getElementById(
+          "categoryDescription"
+        ).value;
+
+        if (!name) {
+          alert("Nama kategori harus diisi!");
+          return;
+        }
+
+        const category = {
+          id: Date.now(),
+          name,
+          description,
+          items: [],
+          createdAt: new Date().toISOString(),
+        };
+
+        categories.push(category);
+        saveUserCategories();
+        renderCategories();
+        updateStats();
+
+        // Reset form and close modal
+        document.getElementById("categoryName").value = "";
+        document.getElementById("categoryDescription").value = "";
+        bootstrap.Modal.getInstance(
+          document.getElementById("addCategoryModal")
+        ).hide();
+
+        alert("Kategori berhasil ditambahkan!");
+      }
+
+      // Save item
+      function saveItem() {
+        const categoryId = parseInt(
+          document.getElementById("itemCategoryId").value
+        );
+        const name = document.getElementById("itemName").value;
+        const username = document.getElementById("itemUsername").value;
+        const password = document.getElementById("itemPassword").value;
+        const notes = document.getElementById("itemNotes").value;
+
+        if (!name || !username || !password) {
+          alert("Nama, username, dan password harus diisi!");
+          return;
+        }
+
+        const category = categories.find((c) => c.id === categoryId);
+        if (!category) return;
+
+        const item = {
+          id: Date.now(),
+          name,
+          username,
+          password,
+          notes,
+          createdAt: new Date().toISOString(),
+        };
+
+        category.items.push(item);
+        saveUserCategories();
+        renderCategories();
+        updateStats();
+
+        // Reset form and close modal
+        document.getElementById("itemName").value = "";
+        document.getElementById("itemUsername").value = "";
+        document.getElementById("itemPassword").value = "";
+        document.getElementById("itemNotes").value = "";
+        bootstrap.Modal.getInstance(
+          document.getElementById("addItemModal")
+        ).hide();
+
+        alert("Akun berhasil ditambahkan!");
+      }
+
+      // Delete category
+      function deleteCategory(id) {
+        if (
+          !confirm(
+            "Hapus kategori ini? Semua akun di dalamnya juga akan terhapus!"
+          )
+        )
+          return;
+
+        categories = categories.filter((c) => c.id !== id);
+        saveUserCategories();
+        renderCategories();
+        updateStats();
+        alert("Kategori berhasil dihapus!");
+      }
+
+      // Delete item
+      function deleteItem(categoryId, itemId) {
+        if (!confirm("Hapus akun ini?")) return;
+
+        const category = categories.find((c) => c.id === categoryId);
+        if (category) {
+          category.items = category.items.filter((i) => i.id !== itemId);
+          saveUserCategories();
+          renderCategories();
+          updateStats();
+          alert("Akun berhasil dihapus!");
+        }
+      }
+
+      // Toggle category content
+      function toggleCategory(id) {
+        const content = document.getElementById(`category-content-${id}`);
+        const icon = document.getElementById(`category-icon-${id}`);
+
+        if (content.style.display === "none") {
+          content.style.display = "block";
+          icon.className = "fas fa-chevron-up";
+        } else {
+          content.style.display = "none";
+          icon.className = "fas fa-chevron-down";
+        }
+      }
+
+      // Open add item modal
+      function openAddItemModal(categoryId) {
+        document.getElementById("itemCategoryId").value = categoryId;
+        new bootstrap.Modal(document.getElementById("addItemModal")).show();
+      }
+
+      // View item details
+      function viewItem(categoryId, itemId) {
+        const category = categories.find((c) => c.id === categoryId);
+        if (!category) return;
+
+        const item = category.items.find((i) => i.id === itemId);
+        if (!item) return;
+
+        currentItemId = itemId;
+        currentCategoryId = categoryId;
+
+        // Populate modal
+        document.getElementById("viewItemTitle").textContent = item.name;
+        document.getElementById("viewItemUsername").textContent = item.username;
+        document.getElementById("viewItemPassword").value = item.password;
+
+        if (item.notes) {
+          document.getElementById("viewItemNotesContainer").style.display =
+            "block";
+          document.getElementById("viewItemNotes").textContent = item.notes;
+        } else {
+          document.getElementById("viewItemNotesContainer").style.display =
+            "none";
+        }
+
+        // Show modal
+        new bootstrap.Modal(document.getElementById("viewItemModal")).show();
+      }
+
+      // Edit current item
+      function editCurrentItem() {
+        if (!currentCategoryId || !currentItemId) return;
+
+        const category = categories.find((c) => c.id === currentCategoryId);
+        if (!category) return;
+
+        const item = category.items.find((i) => i.id === currentItemId);
+        if (!item) return;
+
+        // Populate form
+        document.getElementById("itemCategoryId").value = currentCategoryId;
+        document.getElementById("itemName").value = item.name;
+        document.getElementById("itemUsername").value = item.username;
+        document.getElementById("itemPassword").value = item.password;
+        document.getElementById("itemNotes").value = item.notes || "";
+
+        // Update button text
+        const saveBtn = document.querySelector("#addItemModal .btn-secret");
+        saveBtn.textContent = "Update Akun";
+        saveBtn.onclick = updateItem;
+
+        // Close view modal and open edit modal
+        bootstrap.Modal.getInstance(
+          document.getElementById("viewItemModal")
+        ).hide();
+        new bootstrap.Modal(document.getElementById("addItemModal")).show();
+      }
+
+      // Update item
+      function updateItem() {
+        if (!currentCategoryId || !currentItemId) return;
+
+        const category = categories.find((c) => c.id === currentCategoryId);
+        if (!category) return;
+
+        const itemIndex = category.items.findIndex(
+          (i) => i.id === currentItemId
+        );
+        if (itemIndex === -1) return;
+
+        const name = document.getElementById("itemName").value;
+        const username = document.getElementById("itemUsername").value;
+        const password = document.getElementById("itemPassword").value;
+        const notes = document.getElementById("itemNotes").value;
+
+        if (!name || !username || !password) {
+          alert("Nama, username, dan password harus diisi!");
+          return;
+        }
+
+        category.items[itemIndex] = {
+          ...category.items[itemIndex],
+          name,
+          username,
+          password,
+          notes,
+          updatedAt: new Date().toISOString(),
+        };
+
+        saveUserCategories();
+        renderCategories();
+        updateStats();
+
+        // Reset
+        document.getElementById("itemName").value = "";
+        document.getElementById("itemUsername").value = "";
+        document.getElementById("itemPassword").value = "";
+        document.getElementById("itemNotes").value = "";
+        const saveBtn = document.querySelector("#addItemModal .btn-secret");
+        saveBtn.textContent = "Simpan Akun";
+        saveBtn.onclick = saveItem;
+
+        currentItemId = null;
+        currentCategoryId = null;
+
+        // Close modal
+        bootstrap.Modal.getInstance(
+          document.getElementById("addItemModal")
+        ).hide();
+
+        alert("Akun berhasil diperbarui!");
+      }
+
+      // Delete current item
+      function deleteCurrentItem() {
+        if (!currentCategoryId || !currentItemId) return;
+
+        if (!confirm("Hapus akun ini?")) return;
+
+        const category = categories.find((c) => c.id === currentCategoryId);
+        if (category) {
+          category.items = category.items.filter((i) => i.id !== currentItemId);
+          saveUserCategories();
+          renderCategories();
+          updateStats();
+
+          bootstrap.Modal.getInstance(
+            document.getElementById("viewItemModal")
+          ).hide();
+          currentItemId = null;
+          currentCategoryId = null;
+
+          alert("Akun berhasil dihapus!");
+        }
+      }
+
+      // Copy password to clipboard
+      function copyPassword() {
+        const password = document.getElementById("viewItemPassword").value;
+        navigator.clipboard.writeText(password).then(() => {
+          alert("Password disalin ke clipboard!");
+        });
+      }
+
+      // Render categories
+      function renderCategories() {
+        const container = document.getElementById("categoriesContainer");
+        const emptyState = document.getElementById("emptyState");
+
+        if (categories.length === 0) {
+          container.style.display = "none";
+          emptyState.style.display = "block";
+        } else {
+          container.style.display = "block";
+          emptyState.style.display = "none";
+          container.innerHTML = "";
+
+          categories.forEach((category, index) => {
+            const categoryCard = document.createElement("div");
+            categoryCard.className = "category-card";
+
+            categoryCard.innerHTML = `
+                        <div class="category-header" onclick="toggleCategory(${
+                          category.id
+                        })">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">${category.name}</h5>
+                                    <p class="mb-0 text-muted">
+                                        <span class="badge-category">${
+                                          category.items.length
+                                        } akun</span>
+                                        ${
+                                          category.description
+                                            ? `<span class="ms-2">${category.description}</span>`
+                                            : ""
+                                        }
+                                    </p>
+                                </div>
+                                <i id="category-icon-${
+                                  category.id
+                                }" class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="category-content" id="category-content-${
+                          category.id
+                        }" style="display: none;">
+                            <div class="d-flex justify-content-end mb-3">
+                                <button class="btn btn-sm btn-secret me-2" onclick="openAddItemModal(${
+                                  category.id
+                                })">
+                                    <i class="fas fa-plus me-1"></i> Tambah Akun
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory(${
+                                  category.id
+                                })">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="items-list">
+                                ${
+                                  category.items.length > 0
+                                    ? category.items
+                                        .map(
+                                          (item) => `
+                                    <div class="item-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1">${item.name}</h6>
+                                                <small class="text-muted">${item.username}</small>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-primary me-1" onclick="viewItem(${category.id}, ${item.id})">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(${category.id}, ${item.id})">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `
+                                        )
+                                        .join("")
+                                    : `
+                                    <div class="text-center py-3 text-muted">
+                                        <p>Belum ada akun di kategori ini</p>
+                                    </div>
+                                `
+                                }
+                            </div>
+                        </div>
+                    `;
+
+            container.appendChild(categoryCard);
+          });
+        }
+      }
+
+      // Update statistics
+      function updateStats() {
+        const totalCategories = categories.length;
+        let totalItems = 0;
+        let socialMediaCount = 0;
+        let emailCount = 0;
+
+        categories.forEach((category) => {
+          totalItems += category.items.length;
+
+          const lowerName = category.name.toLowerCase();
+          if (
+            lowerName.includes("media sosial") ||
+            lowerName.includes("instagram") ||
+            lowerName.includes("facebook") ||
+            lowerName.includes("twitter") ||
+            lowerName.includes("tiktok") ||
+            lowerName.includes("whatsapp")
+          ) {
+            socialMediaCount += category.items.length;
+          } else if (
+            lowerName.includes("email") ||
+            lowerName.includes("gmail")
+          ) {
+            emailCount += category.items.length;
+          }
+        });
+
+        document.getElementById("totalCategories").textContent =
+          totalCategories;
+        document.getElementById("totalItems").textContent = totalItems;
+        document.getElementById("socialMediaCount").textContent =
+          socialMediaCount;
+        document.getElementById("emailCount").textContent = emailCount;
+      }
+    </script>
+  </body>
+</html>
