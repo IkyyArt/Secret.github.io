@@ -46,11 +46,22 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: #fff;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         z-index: 9999;
         padding: 40px 0;
         overflow: hidden;
         font-family: "Arvo", serif;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .page_404 .container {
@@ -63,282 +74,242 @@
       .four_zero_four_text {
         text-align: center;
         margin-bottom: 20px;
+        animation: slideDown 0.8s ease-out 0.3s both;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .four_zero_four_text h1 {
         font-family: "Arvo", serif;
         font-size: 80px;
         font-weight: bold;
-        color: #333;
+        color: #fff;
         margin: 0;
-      }
-
-      /* ANIMASI CSS OFFLINE (Mengganti GIF) */
-      .four_zero_four_bg {
+        text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
         position: relative;
-        height: 400px;
-        width: 100%;
-        margin-bottom: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      /* Komputer Animasi */
-      .computer-offline {
-        width: 200px;
-        height: 150px;
-        position: relative;
-      }
-
-      .monitor {
-        width: 180px;
-        height: 120px;
-        background: #e0e0e0;
-        border-radius: 10px 10px 0 0;
-        position: relative;
-        border: 5px solid #333;
-        overflow: hidden;
-      }
-
-      .monitor-screen {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-
-      .no-signal {
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        animation: blink 1.5s infinite;
-      }
-
-      .monitor-stand {
-        width: 40px;
-        height: 30px;
-        background: #333;
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 0 0 5px 5px;
-      }
-
-      .monitor-base {
-        width: 80px;
-        height: 10px;
-        background: #555;
-        position: absolute;
-        bottom: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 5px;
-      }
-
-      /* WiFi Icon Animation */
-      .wifi-container {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-      }
-
-      .wifi-icon {
-        width: 60px;
-        height: 60px;
-        position: relative;
-      }
-
-      .wifi-circle {
-        position: absolute;
-        border: 3px solid var(--danger);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      }
-
-      .wifi-circle-1 {
-        width: 60px;
-        height: 60px;
-        top: 0;
-        left: 0;
-        animation-delay: 0s;
-      }
-
-      .wifi-circle-2 {
-        width: 40px;
-        height: 40px;
-        top: 10px;
-        left: 10px;
-        animation-delay: 0.3s;
-      }
-
-      .wifi-circle-3 {
-        width: 20px;
-        height: 20px;
-        top: 20px;
-        left: 20px;
-        animation-delay: 0.6s;
-      }
-
-      .wifi-cross {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: var(--danger);
-        font-size: 24px;
-      }
-
-      /* Connection Animation */
-      .connection-animation {
-        position: absolute;
-        bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 200px;
-        height: 50px;
-      }
-
-      .signal-bar {
-        position: absolute;
-        bottom: 0;
-        width: 15px;
-        background: var(--danger);
-        border-radius: 3px 3px 0 0;
-        animation: signal 1.5s infinite;
-      }
-
-      .signal-bar-1 {
-        height: 10px;
-        left: 40px;
-        animation-delay: 0s;
-      }
-
-      .signal-bar-2 {
-        height: 20px;
-        left: 60px;
-        animation-delay: 0.1s;
-      }
-
-      .signal-bar-3 {
-        height: 30px;
-        left: 80px;
-        animation-delay: 0.2s;
-      }
-
-      .signal-bar-4 {
-        height: 40px;
-        left: 100px;
-        animation-delay: 0.3s;
-      }
-
-      .signal-bar-5 {
-        height: 50px;
-        left: 120px;
-        animation-delay: 0.4s;
-      }
-
-      /* Animations */
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
+        animation: pulse 2s infinite alternate;
       }
 
       @keyframes pulse {
         0% {
+          text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
           transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.1);
-          opacity: 0.7;
         }
         100% {
-          transform: scale(1);
-          opacity: 1;
+          text-shadow: 0 0 30px rgba(231, 76, 60, 0.8);
+          transform: scale(1.05);
         }
       }
 
-      @keyframes signal {
+      .four_zero_four_bg {
+        height: 300px;
+        position: relative;
+        margin-bottom: 30px;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
         0%,
         100% {
-          height: 10px;
-          background: var(--danger);
-        }
-        25% {
-          height: 25px;
-          background: var(--warning);
+          transform: translateY(0);
         }
         50% {
-          height: 50px;
-          background: var(--secondary);
+          transform: translateY(-20px);
         }
-        75% {
-          height: 25px;
-          background: var(--warning);
+      }
+
+      .offline-icon {
+        font-size: 150px;
+        color: rgba(231, 76, 60, 0.7);
+        position: relative;
+        z-index: 1;
+        animation: spin 15s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .offline-icon:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(
+          circle,
+          rgba(231, 76, 60, 0.2) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: -1;
+      }
+
+      .wifi-signal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        z-index: 2;
+      }
+
+      .signal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 3px solid rgba(231, 76, 60, 0.3);
+        border-radius: 50%;
+        animation: ripple 2s linear infinite;
+      }
+
+      .signal:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+      }
+
+      .signal:nth-child(2) {
+        width: 100px;
+        height: 100px;
+        animation-delay: 0.3s;
+      }
+
+      .signal:nth-child(3) {
+        width: 140px;
+        height: 140px;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: translate(-50%, -50%) scale(0.8);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.5);
+          opacity: 0;
         }
       }
 
       .contant_box_404 {
         text-align: center;
         margin-top: -30px;
+        animation: slideUp 0.8s ease-out 0.6s both;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .contant_box_404 h3 {
         font-family: "Arvo", serif;
         font-size: 28px;
         margin-bottom: 15px;
-        color: #333;
+        color: #fff;
       }
 
       .contant_box_404 p {
         font-size: 18px;
-        color: #666;
+        color: rgba(255, 255, 255, 0.8);
         margin-bottom: 25px;
         line-height: 1.5;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .link_404 {
         color: #fff !important;
         padding: 12px 30px;
-        background: #39ac31;
+        background: #e74c3c;
         margin: 20px 10px;
         display: inline-block;
-        border-radius: 5px;
+        border-radius: 50px;
         text-decoration: none;
         font-weight: 600;
         transition: all 0.3s;
         font-size: 16px;
         border: none;
         cursor: pointer;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .link_404:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .link_404:hover:before {
+        left: 100%;
       }
 
       .link_404:hover {
-        background: #2e8b23;
+        background: #c0392b;
         color: #fff !important;
         text-decoration: none;
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
       }
 
       /* Tombol alternatif */
       .btn-alt {
         background: var(--secondary) !important;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
       }
 
       .btn-alt:hover {
         background: #2980b9 !important;
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
       }
 
       /* Offline Indicator */
@@ -346,15 +317,62 @@
         position: fixed;
         top: 20px;
         right: 20px;
-        background: var(--danger);
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
         color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
+        padding: 12px 20px;
+        border-radius: 50px;
         display: none;
         z-index: 1000;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         font-size: 14px;
-        animation: pulse 2s infinite;
+        animation: slideInRight 0.5s ease-out, pulse 2s infinite 0.5s;
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      @keyframes slideInRight {
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        50% {
+          box-shadow: 0 5px 20px rgba(231, 76, 60, 0.6);
+        }
+      }
+
+      /* Animasi untuk status online */
+      .online-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #27ae60, #229954);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        font-size: 14px;
+        animation: slideInRight 0.5s ease-out, successPulse 2s infinite 0.5s;
+        transform: translateX(100px);
+        opacity: 0;
+      }
+
+      @keyframes successPulse {
+        0%,
+        100% {
+          box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        50% {
+          box-shadow: 0 5px 20px rgba(39, 174, 96, 0.6);
+        }
       }
 
       /* Login Screen */
@@ -532,12 +550,27 @@
 
       /* Responsive */
       @media (max-width: 768px) {
-        .four_zero_four_bg {
-          height: 300px;
+        .four_zero_four_text h1 {
+          font-size: 60px;
         }
 
-        .computer-offline {
-          transform: scale(0.8);
+        .offline-icon {
+          font-size: 120px;
+        }
+
+        .offline-icon:before {
+          width: 150px;
+          height: 150px;
+        }
+
+        .wifi-signal {
+          width: 160px;
+          height: 160px;
+        }
+
+        .signal:nth-child(3) {
+          width: 120px;
+          height: 120px;
         }
 
         .contant_box_404 h3 {
@@ -559,28 +592,17 @@
           padding: 1.5rem;
         }
       }
-
-      @media (max-width: 576px) {
-        .four_zero_four_text h1 {
-          font-size: 60px;
-        }
-
-        .computer-offline {
-          transform: scale(0.7);
-        }
-
-        .wifi-container {
-          top: 10px;
-          right: 10px;
-          transform: scale(0.8);
-        }
-      }
     </style>
   </head>
   <body>
     <!-- Offline Indicator -->
     <div class="offline-indicator" id="offlineIndicator">
       <i class="fas fa-wifi-slash me-2"></i>Anda sedang offline
+    </div>
+
+    <!-- Online Indicator -->
+    <div class="online-indicator" id="onlineIndicator">
+      <i class="fas fa-wifi me-2"></i>Koneksi internet pulih
     </div>
 
     <!-- 404 Error Page (Hidden by default) -->
@@ -593,36 +615,13 @@
             </div>
 
             <div class="four_zero_four_bg">
-              <!-- Animasi komputer offline -->
-              <div class="computer-offline">
-                <div class="monitor">
-                  <div class="monitor-screen">
-                    <div class="no-signal">NO SIGNAL</div>
-                  </div>
-                </div>
-                <div class="monitor-stand"></div>
-                <div class="monitor-base"></div>
+              <div class="offline-icon">
+                <i class="fas fa-wifi-slash"></i>
               </div>
-
-              <!-- Animasi WiFi -->
-              <div class="wifi-container">
-                <div class="wifi-icon">
-                  <div class="wifi-circle wifi-circle-1"></div>
-                  <div class="wifi-circle wifi-circle-2"></div>
-                  <div class="wifi-circle wifi-circle-3"></div>
-                  <div class="wifi-cross">
-                    <i class="fas fa-wifi-slash"></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Animasi sinyal -->
-              <div class="connection-animation">
-                <div class="signal-bar signal-bar-1"></div>
-                <div class="signal-bar signal-bar-2"></div>
-                <div class="signal-bar signal-bar-3"></div>
-                <div class="signal-bar signal-bar-4"></div>
-                <div class="signal-bar signal-bar-5"></div>
+              <div class="wifi-signal">
+                <div class="signal"></div>
+                <div class="signal"></div>
+                <div class="signal"></div>
               </div>
             </div>
 
@@ -631,10 +630,10 @@
 
               <p>
                 Aplikasi membutuhkan koneksi internet untuk bekerja dengan
-                optimal.
+                optimal. Data Anda tetap aman di browser.
               </p>
               <p>
-                Pastikan perangkat Anda terhubung ke internet, lalu refresh
+                Pastikan perangkat Anda terhubung ke internet, lalu coba refresh
                 halaman.
               </p>
 
@@ -1094,6 +1093,7 @@
       let currentCategoryId = null;
       let currentUser = null;
       let isOnline = navigator.onLine;
+      let onlineIndicatorTimeout = null;
 
       // Initialize
       document.addEventListener("DOMContentLoaded", function () {
@@ -1117,6 +1117,9 @@
           document.getElementById("page404").style.display = "none";
           document.getElementById("offlineIndicator").style.display = "none";
 
+          // Show online indicator
+          showOnlineIndicator();
+
           // Show appropriate screen
           if (currentUser) {
             document.getElementById("dashboard").style.display = "block";
@@ -1131,7 +1134,22 @@
           // Hide other screens
           document.getElementById("loginScreen").style.display = "none";
           document.getElementById("dashboard").style.display = "none";
+
+          // Hide online indicator if visible
+          document.getElementById("onlineIndicator").style.display = "none";
         }
+      }
+
+      // Show online indicator
+      function showOnlineIndicator() {
+        const onlineIndicator = document.getElementById("onlineIndicator");
+        onlineIndicator.style.display = "block";
+
+        // Auto-hide after 3 seconds
+        clearTimeout(onlineIndicatorTimeout);
+        onlineIndicatorTimeout = setTimeout(() => {
+          onlineIndicator.style.display = "none";
+        }, 3000);
       }
 
       // Check connection manually
