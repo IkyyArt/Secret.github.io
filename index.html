@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Secrets - Password Manager</title>
+    <title>Your Secrets - Password Manager</title>
     <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -39,7 +39,8 @@
       }
 
       /* Fix layout for scrolling */
-      html, body {
+      html,
+      body {
         overflow-x: hidden;
         width: 100%;
         position: relative;
@@ -720,8 +721,12 @@
       }
 
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       /* File Upload Styles */
@@ -892,7 +897,7 @@
           bottom: 1rem;
           right: 1rem;
         }
-        
+
         .floating-btn {
           bottom: 1rem;
           right: 1rem;
@@ -963,8 +968,8 @@
                   optimal. Data Anda tetap aman di browser.
                 </p>
                 <p>
-                  Pastikan perangkat Anda terhubung ke internet, lalu coba refresh
-                  halaman.
+                  Pastikan perangkat Anda terhubung ke internet, lalu coba
+                  refresh halaman.
                 </p>
 
                 <button class="link_404" onclick="checkConnection()">
@@ -986,7 +991,7 @@
             <i class="fas fa-user-secret"></i>
           </div>
 
-          <h3 class="text-center mb-4">My Secrets</h3>
+          <h3 class="text-center mb-4">Your Secrets</h3>
 
           <!-- Setup Form (muncul pertama kali) -->
           <div id="setupForm">
@@ -1099,7 +1104,7 @@
         <nav class="navbar navbar-expand-lg navbar-light sticky-top">
           <div class="container">
             <a class="navbar-brand fw-bold" href="#">
-              <i class="fas fa-user-secret me-2"></i>My Secrets
+              <i class="fas fa-user-secret me-2"></i>Your Secrets
             </a>
             <div class="navbar-nav ms-auto">
               <div class="nav-item dropdown">
@@ -1124,7 +1129,11 @@
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <a class="dropdown-item text-danger" href="#" onclick="logout()">
+                    <a
+                      class="dropdown-item text-danger"
+                      href="#"
+                      onclick="logout()"
+                    >
                       <i class="fas fa-sign-out-alt me-2"></i>Logout
                     </a>
                   </li>
@@ -1137,7 +1146,7 @@
         <!-- Hero Section -->
         <section class="hero-section">
           <div class="container">
-            <h1 class="display-6 fw-bold mb-2">My Secrets</h1>
+            <h1 class="display-6 fw-bold mb-2">Your Secrets</h1>
             <p class="mb-0">
               Selamat datang, <span id="welcomeUser">User</span>!
             </p>
@@ -1210,10 +1219,7 @@
             <p class="text-muted mb-4">
               Mulai tambahkan kategori untuk menyimpan akun Anda
             </p>
-            <button
-              class="btn btn-secret"
-              onclick="openAddCategoryModal()"
-            >
+            <button class="btn btn-secret" onclick="openAddCategoryModal()">
               <i class="fas fa-plus me-2"></i> Tambah Kategori Pertama
             </button>
           </div>
@@ -1223,7 +1229,7 @@
         <footer class="bg-light py-3 mt-5">
           <div class="container text-center">
             <small class="text-muted">
-              &copy; 2023 My Secrets • Data disimpan di browser
+              &copy; 2023 Your Secrets • Data disimpan di browser
             </small>
           </div>
         </footer>
@@ -1244,7 +1250,9 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="categoryModalTitle">Tambah Kategori</h5>
+              <h5 class="modal-title" id="categoryModalTitle">
+                Tambah Kategori
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -1307,7 +1315,7 @@
             <div class="modal-body">
               <input type="hidden" id="editItemId" value="" />
               <input type="hidden" id="editCategoryIdItem" value="" />
-              
+
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
@@ -1367,7 +1375,10 @@
                         <i class="fas fa-eye"></i>
                       </button>
                     </div>
-                    <div class="password-strength" id="itemPasswordStrength"></div>
+                    <div
+                      class="password-strength"
+                      id="itemPasswordStrength"
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -1384,7 +1395,10 @@
 
               <div class="mb-3">
                 <label class="form-label">Upload File (opsional)</label>
-                <div class="file-upload-container" onclick="document.getElementById('fileUpload').click()">
+                <div
+                  class="file-upload-container"
+                  onclick="document.getElementById('fileUpload').click()"
+                >
                   <div class="file-upload-icon">
                     <i class="fas fa-cloud-upload-alt"></i>
                   </div>
@@ -1394,7 +1408,7 @@
                     type="file"
                     id="fileUpload"
                     multiple
-                    style="display: none;"
+                    style="display: none"
                     onchange="handleFileUpload(event)"
                   />
                 </div>
@@ -1418,7 +1432,12 @@
               >
                 Batal
               </button>
-              <button type="button" class="btn btn-secret" id="saveItemBtn" onclick="saveItem()">
+              <button
+                type="button"
+                class="btn btn-secret"
+                id="saveItemBtn"
+                onclick="saveItem()"
+              >
                 Simpan
               </button>
             </div>
@@ -1552,7 +1571,8 @@
             <div class="modal-body">
               <div class="alert alert-warning">
                 <i class="fas fa-exclamation-triangle me-2"></i>
-                <strong>Peringatan:</strong> Import data akan menimpa semua data yang ada. Backup data Anda terlebih dahulu!
+                <strong>Peringatan:</strong> Import data akan menimpa semua data
+                yang ada. Backup data Anda terlebih dahulu!
               </div>
               <div class="mb-3">
                 <label class="form-label">Pilih file backup (.json)</label>
@@ -1618,10 +1638,14 @@
 
         // Check if account exists
         checkIfAccountExists();
-        
+
         // Setup event listeners for password strength
-        document.getElementById('setupPassword')?.addEventListener('input', checkPasswordStrengthSetup);
-        document.getElementById('itemPassword')?.addEventListener('input', checkPasswordStrengthItem);
+        document
+          .getElementById("setupPassword")
+          ?.addEventListener("input", checkPasswordStrengthSetup);
+        document
+          .getElementById("itemPassword")
+          ?.addEventListener("input", checkPasswordStrengthItem);
       });
 
       // Handle online/offline status
@@ -1762,13 +1786,13 @@
       // Check password strength
       function checkPasswordStrength(password) {
         let strength = 0;
-        
+
         if (password.length >= 8) strength++;
         if (/[a-z]/.test(password)) strength++;
         if (/[A-Z]/.test(password)) strength++;
         if (/[0-9]/.test(password)) strength++;
         if (/[^A-Za-z0-9]/.test(password)) strength++;
-        
+
         return strength;
       }
 
@@ -1777,22 +1801,22 @@
         const strengthBar = document.getElementById("setupPasswordStrength");
         if (strengthBar) updatePasswordStrength(strengthBar, password);
       }
-      
+
       function checkPasswordStrengthItem() {
         const password = document.getElementById("itemPassword").value;
         const strengthBar = document.getElementById("itemPasswordStrength");
         if (strengthBar) updatePasswordStrength(strengthBar, password);
       }
-      
+
       function updatePasswordStrength(element, password) {
         const strength = checkPasswordStrength(password);
         element.className = "password-strength";
-        
+
         if (password.length === 0) {
           element.style.width = "0%";
           return;
         }
-        
+
         if (strength <= 2) {
           element.classList.add("strength-weak");
         } else if (strength === 3) {
@@ -1806,24 +1830,34 @@
 
       // Generate random password
       function generatePassword() {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-        let password = '';
+        const chars =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+        let password = "";
         const length = 12;
-        
+
         // Ensure at least one of each type
-        password += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)];
-        password += 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)];
-        password += '0123456789'[Math.floor(Math.random() * 10)];
-        password += '!@#$%^&*()_+-=[]{}|;:,.<>?'[Math.floor(Math.random() * 30)];
-        
+        password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[
+          Math.floor(Math.random() * 26)
+        ];
+        password += "abcdefghijklmnopqrstuvwxyz"[
+          Math.floor(Math.random() * 26)
+        ];
+        password += "0123456789"[Math.floor(Math.random() * 10)];
+        password += "!@#$%^&*()_+-=[]{}|;:,.<>?"[
+          Math.floor(Math.random() * 30)
+        ];
+
         // Fill the rest
         for (let i = 4; i < length; i++) {
           password += chars[Math.floor(Math.random() * chars.length)];
         }
-        
+
         // Shuffle the password
-        password = password.split('').sort(() => Math.random() - 0.5).join('');
-        
+        password = password
+          .split("")
+          .sort(() => Math.random() - 0.5)
+          .join("");
+
         document.getElementById("itemPassword").value = password;
         checkPasswordStrengthItem();
       }
@@ -1927,10 +1961,10 @@
           `secretCategories_${currentUser}`
         );
         categories = userCategories ? JSON.parse(userCategories) : [];
-        
+
         // Konversi data lama (tanpa attachments) untuk kompatibilitas
-        categories.forEach(category => {
-          category.items = category.items.map(item => {
+        categories.forEach((category) => {
+          category.items = category.items.map((item) => {
             if (!item.attachments) {
               item.attachments = [];
             }
@@ -1968,10 +2002,10 @@
       function populateCategorySelect() {
         const select = document.getElementById("itemCategory");
         if (!select) return;
-        
+
         select.innerHTML = '<option value="">Pilih Kategori</option>';
-        
-        categories.forEach(category => {
+
+        categories.forEach((category) => {
           const option = document.createElement("option");
           option.value = category.id;
           option.textContent = category.name;
@@ -1987,10 +2021,10 @@
         const nameInput = document.getElementById("categoryName");
         const descInput = document.getElementById("categoryDescription");
         const saveBtn = document.getElementById("saveCategoryBtn");
-        
+
         if (categoryId) {
           // Edit mode
-          const category = categories.find(c => c.id === categoryId);
+          const category = categories.find((c) => c.id === categoryId);
           if (category) {
             title.textContent = "Edit Kategori";
             nameInput.value = category.name;
@@ -2006,14 +2040,16 @@
           saveBtn.textContent = "Simpan";
           saveBtn.onclick = () => saveCategory();
         }
-        
+
         new bootstrap.Modal(modal).show();
       }
 
       // Save category
       function saveCategory() {
         const name = document.getElementById("categoryName").value.trim();
-        const description = document.getElementById("categoryDescription").value.trim();
+        const description = document
+          .getElementById("categoryDescription")
+          .value.trim();
 
         if (!name) {
           alert("Nama kategori harus diisi!");
@@ -2026,7 +2062,7 @@
           description,
           items: [],
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
 
         categories.push(category);
@@ -2048,28 +2084,34 @@
       // Update category
       function updateCategory() {
         const name = document.getElementById("categoryName").value.trim();
-        const description = document.getElementById("categoryDescription").value.trim();
+        const description = document
+          .getElementById("categoryDescription")
+          .value.trim();
 
         if (!name) {
           alert("Nama kategori harus diisi!");
           return;
         }
 
-        const categoryIndex = categories.findIndex(c => c.id === currentEditingCategoryId);
+        const categoryIndex = categories.findIndex(
+          (c) => c.id === currentEditingCategoryId
+        );
         if (categoryIndex !== -1) {
           categories[categoryIndex].name = name;
           categories[categoryIndex].description = description;
           categories[categoryIndex].updatedAt = new Date().toISOString();
-          
+
           saveUserCategories();
           renderCategories();
           updateStats();
           populateCategorySelect();
-          
-          bootstrap.Modal.getInstance(document.getElementById("addCategoryModal")).hide();
+
+          bootstrap.Modal.getInstance(
+            document.getElementById("addCategoryModal")
+          ).hide();
           alert("Kategori berhasil diperbarui!");
         }
-        
+
         currentEditingCategoryId = null;
       }
 
@@ -2077,39 +2119,39 @@
       function handleFileUpload(event) {
         const files = event.target.files;
         const previewContainer = document.getElementById("filePreview");
-        
+
         // Reset preview
         previewContainer.innerHTML = "";
         currentUploadedFiles = [];
-        
+
         // Validate files
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
-          
+
           // Check file size (max 5MB)
           if (file.size > 5 * 1024 * 1024) {
             alert(`File "${file.name}" terlalu besar. Maksimal 5MB.`);
             continue;
           }
-          
+
           // Convert file to base64 for storage
           const reader = new FileReader();
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             currentUploadedFiles.push({
               name: file.name,
               type: file.type,
               size: file.size,
-              data: e.target.result.split(',')[1], // Remove data URL prefix
-              lastModified: file.lastModified
+              data: e.target.result.split(",")[1], // Remove data URL prefix
+              lastModified: file.lastModified,
             });
-            
+
             // Add to preview
             const fileItem = document.createElement("div");
             fileItem.className = "file-item";
-            
+
             const fileSize = formatFileSize(file.size);
             const fileIcon = getFileIcon(file.type, file.name);
-            
+
             fileItem.innerHTML = `
               <div class="file-info">
                 <div class="file-name">${file.name}</div>
@@ -2121,30 +2163,32 @@
                 </button>
               </div>
             `;
-            
+
             // Insert icon
             const iconSpan = document.createElement("span");
             iconSpan.className = "file-icon";
             iconSpan.innerHTML = `<i class="${fileIcon}"></i>`;
             fileItem.insertBefore(iconSpan, fileItem.firstChild);
-            
+
             previewContainer.appendChild(fileItem);
           };
-          
+
           reader.readAsDataURL(file);
         }
       }
 
       // Remove file from upload list
       function removeFile(fileName) {
-        currentUploadedFiles = currentUploadedFiles.filter(file => file.name !== fileName);
-        
+        currentUploadedFiles = currentUploadedFiles.filter(
+          (file) => file.name !== fileName
+        );
+
         // Update preview
         const previewContainer = document.getElementById("filePreview");
-        const fileItems = previewContainer.querySelectorAll('.file-item');
-        
-        fileItems.forEach(item => {
-          const nameElement = item.querySelector('.file-name');
+        const fileItems = previewContainer.querySelectorAll(".file-item");
+
+        fileItems.forEach((item) => {
+          const nameElement = item.querySelector(".file-name");
           if (nameElement && nameElement.textContent === fileName) {
             item.remove();
           }
@@ -2153,27 +2197,43 @@
 
       // Get icon based on file type
       function getFileIcon(fileType, fileName) {
-        const extension = fileName.split('.').pop().toLowerCase();
-        
-        if (fileType.startsWith('image/')) return 'fas fa-image';
-        if (fileType.startsWith('video/')) return 'fas fa-video';
-        if (fileType.startsWith('audio/')) return 'fas fa-music';
-        if (fileType.includes('pdf')) return 'fas fa-file-pdf';
-        if (fileType.includes('word') || extension === 'doc' || extension === 'docx') return 'fas fa-file-word';
-        if (fileType.includes('excel') || extension === 'xls' || extension === 'xlsx') return 'fas fa-file-excel';
-        if (fileType.includes('powerpoint') || extension === 'ppt' || extension === 'pptx') return 'fas fa-file-powerpoint';
-        if (extension === 'txt') return 'fas fa-file-alt';
-        if (extension === 'zip' || extension === 'rar' || extension === '7z') return 'fas fa-file-archive';
-        return 'fas fa-file';
+        const extension = fileName.split(".").pop().toLowerCase();
+
+        if (fileType.startsWith("image/")) return "fas fa-image";
+        if (fileType.startsWith("video/")) return "fas fa-video";
+        if (fileType.startsWith("audio/")) return "fas fa-music";
+        if (fileType.includes("pdf")) return "fas fa-file-pdf";
+        if (
+          fileType.includes("word") ||
+          extension === "doc" ||
+          extension === "docx"
+        )
+          return "fas fa-file-word";
+        if (
+          fileType.includes("excel") ||
+          extension === "xls" ||
+          extension === "xlsx"
+        )
+          return "fas fa-file-excel";
+        if (
+          fileType.includes("powerpoint") ||
+          extension === "ppt" ||
+          extension === "pptx"
+        )
+          return "fas fa-file-powerpoint";
+        if (extension === "txt") return "fas fa-file-alt";
+        if (extension === "zip" || extension === "rar" || extension === "7z")
+          return "fas fa-file-archive";
+        return "fas fa-file";
       }
 
       // Format file size
       function formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
+        if (bytes === 0) return "0 Bytes";
         const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const sizes = ["Bytes", "KB", "MB", "GB"];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
       }
 
       // Open add item modal (for edit or add)
@@ -2183,11 +2243,11 @@
         const modal = document.getElementById("addItemModal");
         const title = document.getElementById("itemModalTitle");
         const saveBtn = document.getElementById("saveItemBtn");
-        
+
         title.textContent = "Tambah Akun";
         saveBtn.textContent = "Simpan";
         saveBtn.onclick = () => saveItem();
-        
+
         // Reset form
         document.getElementById("editItemId").value = "";
         document.getElementById("itemName").value = "";
@@ -2195,24 +2255,27 @@
         document.getElementById("itemPassword").value = "";
         document.getElementById("itemUrl").value = "";
         document.getElementById("itemNotes").value = "";
-        document.getElementById("itemPasswordStrength").className = "password-strength";
+        document.getElementById("itemPasswordStrength").className =
+          "password-strength";
         document.getElementById("filePreview").innerHTML = "";
         document.getElementById("fileUpload").value = "";
-        
+
         // Set category if provided
         if (categoryId) {
           document.getElementById("itemCategory").value = categoryId;
         }
-        
+
         // Populate category select
         populateCategorySelect();
-        
+
         new bootstrap.Modal(modal).show();
       }
 
       // Save item
       function saveItem() {
-        const categoryId = parseInt(document.getElementById("itemCategory").value);
+        const categoryId = parseInt(
+          document.getElementById("itemCategory").value
+        );
         const name = document.getElementById("itemName").value.trim();
         const username = document.getElementById("itemUsername").value.trim();
         const password = document.getElementById("itemPassword").value;
@@ -2241,7 +2304,7 @@
           notes,
           attachments: [...currentUploadedFiles], // Save uploaded files
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         };
 
         category.items.push(item);
@@ -2258,7 +2321,7 @@
         document.getElementById("filePreview").innerHTML = "";
         document.getElementById("fileUpload").value = "";
         currentUploadedFiles = [];
-        
+
         bootstrap.Modal.getInstance(
           document.getElementById("addItemModal")
         ).hide();
@@ -2327,28 +2390,40 @@
         document.getElementById("viewItemCategory").textContent = category.name;
         document.getElementById("viewItemUsername").textContent = item.username;
         document.getElementById("viewItemPassword").value = item.password;
-        document.getElementById("viewItemCreated").textContent = new Date(item.createdAt).toLocaleString();
-        document.getElementById("viewItemUpdated").textContent = new Date(item.updatedAt).toLocaleString();
-        
+        document.getElementById("viewItemCreated").textContent = new Date(
+          item.createdAt
+        ).toLocaleString();
+        document.getElementById("viewItemUpdated").textContent = new Date(
+          item.updatedAt
+        ).toLocaleString();
+
         if (item.url) {
-          document.getElementById("viewItemUrlContainer").style.display = "block";
-          document.getElementById("viewItemUrl").innerHTML = `<a href="${item.url}" target="_blank" class="url-link">${item.url}</a>`;
+          document.getElementById("viewItemUrlContainer").style.display =
+            "block";
+          document.getElementById(
+            "viewItemUrl"
+          ).innerHTML = `<a href="${item.url}" target="_blank" class="url-link">${item.url}</a>`;
         } else {
-          document.getElementById("viewItemUrlContainer").style.display = "none";
+          document.getElementById("viewItemUrlContainer").style.display =
+            "none";
         }
 
         // Show attachments if any
         if (item.attachments && item.attachments.length > 0) {
-          const attachmentsContainer = document.getElementById("viewItemAttachmentsContainer");
-          const attachmentsList = document.getElementById("viewItemAttachments");
-          
+          const attachmentsContainer = document.getElementById(
+            "viewItemAttachmentsContainer"
+          );
+          const attachmentsList = document.getElementById(
+            "viewItemAttachments"
+          );
+
           attachmentsContainer.style.display = "block";
           attachmentsList.innerHTML = "";
-          
+
           item.attachments.forEach((file, index) => {
             const fileIcon = getFileIcon(file.type, file.name);
             const fileSize = formatFileSize(file.size);
-            
+
             const attachmentItem = document.createElement("div");
             attachmentItem.className = "attachment-item";
             attachmentItem.innerHTML = `
@@ -2360,18 +2435,22 @@
                 <i class="fas fa-download"></i>
               </button>
             `;
-            
+
             attachmentsList.appendChild(attachmentItem);
           });
         } else {
-          document.getElementById("viewItemAttachmentsContainer").style.display = "none";
+          document.getElementById(
+            "viewItemAttachmentsContainer"
+          ).style.display = "none";
         }
 
         if (item.notes) {
-          document.getElementById("viewItemNotesContainer").style.display = "block";
+          document.getElementById("viewItemNotesContainer").style.display =
+            "block";
           document.getElementById("viewItemNotes").textContent = item.notes;
         } else {
-          document.getElementById("viewItemNotesContainer").style.display = "none";
+          document.getElementById("viewItemNotesContainer").style.display =
+            "none";
         }
 
         // Show modal
@@ -2388,9 +2467,9 @@
           }
           const byteArray = new Uint8Array(byteNumbers);
           const blob = new Blob([byteArray], { type: fileType });
-          
+
           const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
+          const a = document.createElement("a");
           a.href = url;
           a.download = fileName;
           document.body.appendChild(a);
@@ -2398,8 +2477,8 @@
           window.URL.revokeObjectURL(url);
           document.body.removeChild(a);
         } catch (error) {
-          console.error('Error downloading file:', error);
-          alert('Gagal mendownload file. File mungkin rusak.');
+          console.error("Error downloading file:", error);
+          alert("Gagal mendownload file. File mungkin rusak.");
         }
       }
 
@@ -2415,16 +2494,16 @@
 
         currentEditingItemId = currentItemId;
         currentUploadedFiles = item.attachments || [];
-        
+
         // Populate form
         const modal = document.getElementById("addItemModal");
         const title = document.getElementById("itemModalTitle");
         const saveBtn = document.getElementById("saveItemBtn");
-        
+
         title.textContent = "Edit Akun";
         saveBtn.textContent = "Update";
         saveBtn.onclick = () => updateItem();
-        
+
         document.getElementById("editItemId").value = item.id;
         document.getElementById("itemCategory").value = currentCategoryId;
         document.getElementById("itemName").value = item.name;
@@ -2432,19 +2511,19 @@
         document.getElementById("itemPassword").value = item.password;
         document.getElementById("itemUrl").value = item.url || "";
         document.getElementById("itemNotes").value = item.notes || "";
-        
+
         // Show existing attachments
         const previewContainer = document.getElementById("filePreview");
         previewContainer.innerHTML = "";
-        
+
         if (item.attachments && item.attachments.length > 0) {
-          item.attachments.forEach(file => {
+          item.attachments.forEach((file) => {
             const fileItem = document.createElement("div");
             fileItem.className = "file-item";
-            
+
             const fileSize = formatFileSize(file.size);
             const fileIcon = getFileIcon(file.type, file.name);
-            
+
             fileItem.innerHTML = `
               <div class="file-info">
                 <div class="file-name">${file.name}</div>
@@ -2456,20 +2535,20 @@
                 </button>
               </div>
             `;
-            
+
             // Insert icon
             const iconSpan = document.createElement("span");
             iconSpan.className = "file-icon";
             iconSpan.innerHTML = `<i class="${fileIcon}"></i>`;
             fileItem.insertBefore(iconSpan, fileItem.firstChild);
-            
+
             previewContainer.appendChild(fileItem);
           });
         }
-        
+
         checkPasswordStrengthItem();
         populateCategorySelect();
-        
+
         // Close view modal and open edit modal
         bootstrap.Modal.getInstance(
           document.getElementById("viewItemModal")
@@ -2479,7 +2558,9 @@
 
       // Update item
       function updateItem() {
-        const categoryId = parseInt(document.getElementById("itemCategory").value);
+        const categoryId = parseInt(
+          document.getElementById("itemCategory").value
+        );
         const name = document.getElementById("itemName").value.trim();
         const username = document.getElementById("itemUsername").value.trim();
         const password = document.getElementById("itemPassword").value;
@@ -2523,7 +2604,7 @@
         document.getElementById("itemNotes").value = "";
         document.getElementById("filePreview").innerHTML = "";
         document.getElementById("fileUpload").value = "";
-        
+
         const saveBtn = document.getElementById("saveItemBtn");
         saveBtn.textContent = "Simpan";
         saveBtn.onclick = saveItem;
@@ -2574,61 +2655,93 @@
 
       // Search items
       function searchItems() {
-        const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase()
+          .trim();
         const container = document.getElementById("categoriesContainer");
         const emptyState = document.getElementById("emptyState");
-        
+
         if (!searchTerm) {
           renderCategories();
           return;
         }
-        
+
         let hasResults = false;
-        let html = '';
-        
-        categories.forEach(category => {
-          const matchingItems = category.items.filter(item =>
-            item.name.toLowerCase().includes(searchTerm) ||
-            item.username.toLowerCase().includes(searchTerm) ||
-            (item.notes && item.notes.toLowerCase().includes(searchTerm)) ||
-            category.name.toLowerCase().includes(searchTerm) ||
-            (category.description && category.description.toLowerCase().includes(searchTerm))
+        let html = "";
+
+        categories.forEach((category) => {
+          const matchingItems = category.items.filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchTerm) ||
+              item.username.toLowerCase().includes(searchTerm) ||
+              (item.notes && item.notes.toLowerCase().includes(searchTerm)) ||
+              category.name.toLowerCase().includes(searchTerm) ||
+              (category.description &&
+                category.description.toLowerCase().includes(searchTerm))
           );
-          
-          if (matchingItems.length > 0 || category.name.toLowerCase().includes(searchTerm)) {
+
+          if (
+            matchingItems.length > 0 ||
+            category.name.toLowerCase().includes(searchTerm)
+          ) {
             hasResults = true;
-            
+
             // Include all items if category name matches, otherwise only matching items
-            const itemsToShow = category.name.toLowerCase().includes(searchTerm) ? category.items : matchingItems;
-            
+            const itemsToShow = category.name.toLowerCase().includes(searchTerm)
+              ? category.items
+              : matchingItems;
+
             html += `
               <div class="category-card">
-                <div class="category-header" onclick="toggleCategory(${category.id})">
+                <div class="category-header" onclick="toggleCategory(${
+                  category.id
+                })">
                   <div class="d-flex justify-content-between align-items-center">
                     <div>
                       <h5 class="mb-1">${category.name}</h5>
                       <p class="mb-0 text-muted">
-                        <span class="badge-category">${itemsToShow.length} hasil ditemukan</span>
-                        ${category.description ? `<span class="ms-2">${category.description}</span>` : ''}
+                        <span class="badge-category">${
+                          itemsToShow.length
+                        } hasil ditemukan</span>
+                        ${
+                          category.description
+                            ? `<span class="ms-2">${category.description}</span>`
+                            : ""
+                        }
                       </p>
                     </div>
-                    <i id="category-icon-${category.id}" class="fas fa-chevron-down"></i>
+                    <i id="category-icon-${
+                      category.id
+                    }" class="fas fa-chevron-down"></i>
                   </div>
                 </div>
-                <div class="category-content" id="category-content-${category.id}" style="display: none;">
+                <div class="category-content" id="category-content-${
+                  category.id
+                }" style="display: none;">
                   <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-sm btn-secret me-2" onclick="openAddItemModal(${category.id})">
+                    <button class="btn btn-sm btn-secret me-2" onclick="openAddItemModal(${
+                      category.id
+                    })">
                       <i class="fas fa-plus me-1"></i> Tambah Akun
                     </button>
-                    <button class="btn btn-sm btn-outline-warning me-2" onclick="openAddCategoryModal(${category.id})">
+                    <button class="btn btn-sm btn-outline-warning me-2" onclick="openAddCategoryModal(${
+                      category.id
+                    })">
                       <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory(${category.id})">
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory(${
+                      category.id
+                    })">
                       <i class="fas fa-trash"></i>
                     </button>
                   </div>
                   <div class="items-list">
-                    ${itemsToShow.length > 0 ? itemsToShow.map(item => `
+                    ${
+                      itemsToShow.length > 0
+                        ? itemsToShow
+                            .map(
+                              (item) => `
                       <div class="item-card">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
@@ -2645,18 +2758,22 @@
                           </div>
                         </div>
                       </div>
-                    `).join('') : `
+                    `
+                            )
+                            .join("")
+                        : `
                       <div class="text-center py-3 text-muted">
                         <p>Belum ada akun di kategori ini</p>
                       </div>
-                    `}
+                    `
+                    }
                   </div>
                 </div>
               </div>
             `;
           }
         });
-        
+
         if (hasResults) {
           container.innerHTML = html;
           container.style.display = "block";
@@ -2746,16 +2863,21 @@
                             <div>
                               <h6 class="mb-1">${item.name}</h6>
                               <small class="text-muted">${item.username}</small>
-                              ${item.attachments && item.attachments.length > 0 ? 
-                                `<small class="text-info"><i class="fas fa-paperclip me-1"></i>${item.attachments.length} file</small>` : 
-                                ''
+                              ${
+                                item.attachments && item.attachments.length > 0
+                                  ? `<small class="text-info"><i class="fas fa-paperclip me-1"></i>${item.attachments.length} file</small>`
+                                  : ""
                               }
                             </div>
                             <div>
-                              <button class="btn btn-sm btn-outline-primary me-1" onclick="viewItem(${category.id}, ${item.id})">
+                              <button class="btn btn-sm btn-outline-primary me-1" onclick="viewItem(${
+                                category.id
+                              }, ${item.id})">
                                 <i class="fas fa-eye"></i>
                               </button>
-                              <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(${category.id}, ${item.id})">
+                              <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(${
+                                category.id
+                              }, ${item.id})">
                                 <i class="fas fa-trash"></i>
                               </button>
                             </div>
@@ -2823,23 +2945,26 @@
         }
 
         const data = {
-          version: '1.1',
+          version: "1.1",
           exportedAt: new Date().toISOString(),
           user: currentUser,
-          categories: categories
+          categories: categories,
         };
 
         const dataStr = JSON.stringify(data, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        const dataUri =
+          "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
 
-        const exportFileDefaultName = `my-secrets-backup-${new Date().toISOString().split('T')[0]}.json`;
+        const exportFileDefaultName = `my-secrets-backup-${
+          new Date().toISOString().split("T")[0]
+        }.json`;
 
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
+        const linkElement = document.createElement("a");
+        linkElement.setAttribute("href", dataUri);
+        linkElement.setAttribute("download", exportFileDefaultName);
         linkElement.click();
 
-        alert('Data berhasil diexport!');
+        alert("Data berhasil diexport!");
       }
 
       // Import data
@@ -2872,38 +2997,51 @@
         const file = fileInput.files[0];
         const reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           try {
             const importedData = JSON.parse(e.target.result);
-            
+
             // Basic validation
-            if (!importedData.categories || !Array.isArray(importedData.categories)) {
+            if (
+              !importedData.categories ||
+              !Array.isArray(importedData.categories)
+            ) {
               throw new Error("Format file tidak valid");
             }
 
             // Backup current data
-            const currentBackup = localStorage.getItem(`secretCategories_${currentUser}`);
-            
+            const currentBackup = localStorage.getItem(
+              `secretCategories_${currentUser}`
+            );
+
             // Try to import
-            localStorage.setItem(`secretCategories_${currentUser}`, JSON.stringify(importedData.categories));
-            
+            localStorage.setItem(
+              `secretCategories_${currentUser}`,
+              JSON.stringify(importedData.categories)
+            );
+
             // Reload and verify
             loadUserCategories();
-            
+
             if (categories.length === importedData.categories.length) {
               renderCategories();
               updateStats();
               populateCategorySelect();
-              
+
               // Reset form
               fileInput.value = "";
               document.getElementById("importPassword").value = "";
-              
-              bootstrap.Modal.getInstance(document.getElementById("importModal")).hide();
+
+              bootstrap.Modal.getInstance(
+                document.getElementById("importModal")
+              ).hide();
               alert("Data berhasil diimport!");
             } else {
               // Restore backup if failed
-              localStorage.setItem(`secretCategories_${currentUser}`, currentBackup);
+              localStorage.setItem(
+                `secretCategories_${currentUser}`,
+                currentBackup
+              );
               loadUserCategories();
               throw new Error("Import gagal, data dikembalikan");
             }
